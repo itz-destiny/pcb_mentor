@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const Mentorship = () => {
   return (
@@ -28,10 +29,10 @@ const Mentorship = () => {
         </div>
       </div>
       <div className="w-full md:w-1/2 relative">
-        <img
+        <Image
           src="/laptop.png"
-          height={653}
           width={556}
+          height={653}
           alt="Mentorship benefits illustration"
           className="w-full h-full object-cover rounded-lg"
         />

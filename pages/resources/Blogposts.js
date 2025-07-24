@@ -1,33 +1,39 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Navbar from "./Navbar"; // Import the existing Navbar component
-import Footer from "./Footer"; // Import the existing Footer component
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import Image from "next/image";
 
 const BlogPage = () => {
   const blogPosts = [
     {
       title: "5 Smart Ways to Kickstart Your Electronics Engineering Career",
-      excerpt: "Feeling stuck or unsure where to begin? These five practical tips will help you build direction, confidence, and traction as a beginner engineer.",
+      excerpt:
+        "Feeling stuck or unsure where to begin? These five practical tips will help you build direction, confidence, and traction as a beginner engineer.",
       image: "https://placehold.co/467x221",
     },
     {
       title: "Top 3 Free PCB Design Tools for Beginners (And How to Use Them)",
-      excerpt: "Start designing today with these beginner-friendly tools. This guide walks you through setup, workflow, and key features to try.",
+      excerpt:
+        "Start designing today with these beginner-friendly tools. This guide walks you through setup, workflow, and key features to try.",
       image: "https://placehold.co/467x221",
     },
     {
       title: "From Doubt to Confidence: The Engineer’s Mindset Shift",
-      excerpt: "Imposter syndrome is real — but beatable. Learn the mindset shifts that helped me go from self-doubt to building my first real project.",
+      excerpt:
+        "Imposter syndrome is real — but beatable. Learn the mindset shifts that helped me go from self-doubt to building my first real project.",
       image: "https://placehold.co/467x221",
     },
     {
       title: "Build Your First Circuit: Blinking LED with a 555 Timer",
-      excerpt: "An easy, beginner-friendly project that introduces you to timers, breadboards, and fun hands-on learning with real results.",
+      excerpt:
+        "An easy, beginner-friendly project that introduces you to timers, breadboards, and fun hands-on learning with real results.",
       image: "https://placehold.co/467x221",
     },
     {
       title: "Avoid These 7 Common PCB Layout Mistakes",
-      excerpt: "Bad traces, noisy power lines, wrong footprints — learn how to avoid rookie errors in your next PCB layout with this checklist.",
+      excerpt:
+        "Bad traces, noisy power lines, wrong footprints — learn how to avoid rookie errors in your next PCB layout with this checklist.",
       image: "https://placehold.co/467x221",
     },
   ];
@@ -38,10 +44,12 @@ const BlogPage = () => {
       <main className="w-full flex flex-col justify-start items-center overflow-hidden">
         {/* Hero Section */}
         <div className="w-full h-[393.04px] relative overflow-hidden">
-          <img
+          <Image
             className="w-full h-full object-cover absolute top-0 left-0"
-            src="https://placehold.co/1440x393" // Replace with your hero image URL
+            src="https://placehold.co/1440x393"
             alt="Blog Hero"
+            width={1440}
+            height={393}
           />
           <div className="w-full h-full absolute top-0 left-0 bg-black bg-opacity-50 flex justify-center items-center">
             <motion.div
@@ -54,7 +62,8 @@ const BlogPage = () => {
                 Learning Hub
               </h1>
               <p className="w-full text-center text-white text-base sm:text-lg font-normal font-[var(--font-sans)] leading-[26.96px]">
-                Explore practical content to help you grow as an engineer — from beginner basics to career strategies.
+                Explore practical content to help you grow as an engineer — from
+                beginner basics to career strategies.
               </p>
             </motion.div>
           </div>
@@ -72,7 +81,8 @@ const BlogPage = () => {
               Blog Posts
             </h2>
             <p className="w-full max-w-[530px] text-center text-[var(--color-foreground)] text-base sm:text-lg font-normal font-[var(--font-sans)] leading-normal">
-              Explore practical content to help you grow as an engineer from beginner basics to career strategies.
+              Explore practical content to help you grow as an engineer from
+              beginner basics to career strategies.
             </p>
           </motion.div>
           <div className="w-full flex flex-col justify-start items-start gap-6 sm:gap-8">
@@ -87,10 +97,12 @@ const BlogPage = () => {
                   className="w-full flex-1 p-5 bg-[#f0f0f0] rounded-[13px] flex flex-col justify-start items-start gap-5"
                 >
                   <div className="w-full h-[215px] overflow-hidden rounded-[17px]">
-                    <img
+                    <Image
                       className="w-full h-full object-cover rounded-[17px]"
                       src={post.image}
                       alt={post.title}
+                      width={467}
+                      height={221}
                     />
                   </div>
                   <h3 className="w-full text-center text-[var(--color-foreground)] text-lg sm:text-xl font-bold font-[var(--font-sans)] leading-relaxed">
@@ -125,10 +137,12 @@ const BlogPage = () => {
                   className="w-full flex-1 p-5 bg-[#f0f0f0] rounded-[13px] flex flex-col justify-start items-start gap-5"
                 >
                   <div className="w-full h-[215px] overflow-hidden rounded-[17px]">
-                    <img
+                    <Image
                       className="w-full h-full object-cover rounded-[17px]"
                       src={post.image}
                       alt={post.title}
+                      width={467}
+                      height={221}
                     />
                   </div>
                   <h3 className="w-[331px] text-center text-[var(--color-foreground)] text-lg sm:text-xl font-bold font-[var(--font-sans)] leading-relaxed">

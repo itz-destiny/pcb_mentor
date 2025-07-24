@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion"; // Corrected import
 import Navbar from "@/pages/components/Navbar";
 import Footer from "@/pages/components/Footer";
+import Image from "next/image";
 
 const BlogPostFiveSmartWays = () => {
   return (
@@ -10,20 +11,28 @@ const BlogPostFiveSmartWays = () => {
       <main className="w-full flex flex-col justify-start items-center overflow-hidden">
         {/* Header Section */}
         <div className="w-full max-w-[1128px] h-[749.84px] relative bg-[#1b1b1f] rounded-2xl overflow-hidden mx-auto">
-          <img
+          <Image
             className="w-full h-[642.72px] left-0 top-[55.18px] absolute object-cover"
             src="https://placehold.co/1128x643"
             alt="Blog Header Background 1"
+            width={1128}
+            height={643}
           />
-          <img
+
+          <Image
             className="w-full h-[642.72px] left-0 top-0 absolute object-cover"
             src="https://placehold.co/1128x643"
             alt="Blog Header Background 2"
+            width={1128}
+            height={643}
           />
-          <img
+
+          <Image
             className="w-[1209.85px] h-[659.92px] left-[-40.87px] top-0 absolute rounded-[47.26px] object-cover"
             src="https://placehold.co/1210x660"
             alt="Blog Header Overlay"
+            width={1210}
+            height={660}
           />
           <div className="w-full h-[269.42px] left-0 top-[480.41px] absolute overflow-hidden">
             <div className="w-full h-full absolute bg-black/10 backdrop-blur-[28.40px]" />
@@ -91,7 +100,7 @@ const BlogPostFiveSmartWays = () => {
             </h2>
             <p className="mb-6">
               Take advantage of free tutorials on platforms like YouTube or
-              PCB-Mentor's own video library. Focus on structured learning paths
+              PCB-Mentors own video library. Focus on structured learning paths
               that cover circuit theory, PCB design software (e.g., KiCad), and
               simulation tools. Combine these with community forums to ask
               questions and learn from others.
@@ -102,7 +111,7 @@ const BlogPostFiveSmartWays = () => {
             </h2>
             <p className="mb-6">
               A mentor can provide personalized guidance, helping you avoid
-              common pitfalls. Programs like PCB-Mentor's mentorship offer
+              common pitfalls. Programs like PCB-Mentors mentorship offer
               step-by-step support, connecting you with experienced engineers to
               accelerate your learning curve and boost your confidence.
             </p>
@@ -127,13 +136,13 @@ const BlogPostFiveSmartWays = () => {
               Start small, and gradually tackle more complex designs.
             </p>
 
-            <p className="mt-6 text-center">
+            {/* <p className="mt-6 text-center">
               Ready to take the next step? Explore more resources on our{" "}
               <a href="/resources" className="text-[#473bf0] hover:underline">
                 Resources page
               </a>{" "}
               or apply for mentorship to get started today!
-            </p>
+            </p> */}
           </motion.div>
         </div>
       </main>
