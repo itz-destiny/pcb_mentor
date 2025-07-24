@@ -6,7 +6,7 @@ const CommunitySection = () => {
       {/* Text Content */}
       <div className="flex flex-col items-start gap-6 w-full md:w-1/2 order-1 md:order-2">
         <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--color-primary)]">
-          You're Not Alone
+          You Are Not Alone
         </h2>
         <p className="text-xl font-normal text-[var(--color-foreground)] leading-relaxed max-w-md">
           Become part of a supportive engineering community. Ask questions,

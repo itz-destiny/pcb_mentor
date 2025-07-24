@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Image from "next/image"; // Import Next.js Image component
 
 const AboutPage = () => {
   return (
@@ -16,10 +17,12 @@ const AboutPage = () => {
           className="w-full flex flex-col justify-start items-center gap-6 sm:gap-8"
         >
           <div className="w-[264px] h-[223.60px] relative">
-            <img
+            <Image
               className="w-[223.60px] h-[223.60px] rounded-[194.63px] object-cover"
               src="/founder.png"
               alt="Joseph Ogbonna"
+              width={223.6}
+              height={223.6}
             />
             <div className="w-[163px] h-11 absolute left-1/2 transform -translate-x-1/2 top-[145px] bg-white rounded-md shadow-[0px_1.0723683834075928px_5.200986385345459px_0px_rgba(0,0,0,0.25)] flex items-center justify-between px-3">
               <div>
@@ -37,7 +40,7 @@ const AboutPage = () => {
           </div>
           <div className="flex flex-col justify-center items-center gap-4">
             <h2 className="w-full max-w-[693px] text-center text-[var(--color-primary)] text-3xl sm:text-4xl md:text-5xl font-extrabold font-[var(--font-sans)] leading-[52.80px]">
-              I’m Joseph. I Created PCB Mentor to Be What I Wish I Had
+              I&apos;m Joseph. I Created PCB Mentor to Be What I Wish I Had
             </h2>
             <p className="w-full max-w-[468px] text-center text-[var(--color-foreground)] text-base sm:text-lg font-normal font-[var(--font-sans)] leading-normal">
               Explore practical content to help you grow as an engineer — from
@@ -45,6 +48,7 @@ const AboutPage = () => {
             </p>
           </div>
         </motion.div>
+
         {/* Personal Journey Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -58,9 +62,10 @@ const AboutPage = () => {
             </h2>
             <p className="w-full max-w-[660px] text-center text-[var(--color-text-secondary)] text-base sm:text-lg font-normal font-[var(--font-sans)] leading-normal">
               PCB Mentor is a platform created to guide and empower electronics
-              engineers, especially beginners and intermediates. Whether you're
-              starting your journey or looking to level up, we provide practical
-              content and expert mentorship to help you thrive.
+              engineers, especially beginners and intermediates. Whether
+              you&apos;re starting your journey or looking to level up, we
+              provide practical content and expert mentorship to help you
+              thrive.
             </p>
           </div>
         </motion.div>
@@ -95,7 +100,11 @@ const AboutPage = () => {
           </p>
         </motion.div>
       </main>
-      <Footer />
+      <div className="mt-12 sm:mt-16 lg:mt-20">
+        {" "}
+        {/* Increased spacing before Footer */}
+        <Footer />
+      </div>
     </div>
   );
 };

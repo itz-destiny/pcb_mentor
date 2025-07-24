@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -33,7 +34,7 @@ const Hero = () => {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row justify-start items-center gap-4">
-          <a
+          <Link
             href="/learn"
             className="px-4 py-3 sm:px-6 sm:py-4 bg-[var(--color-primary)] rounded-[40px] flex justify-center items-center gap-2.5 hover:bg-[#2a4b8c] transition-colors duration-200"
           >
@@ -47,8 +48,8 @@ const Hero = () => {
               alt="Arrow icon"
               className="w-6 h-6 sm:w-8 sm:h-8"
             />
-          </a>
-          <a
+          </Link>
+          <Link
             href="/mentorship"
             className="flex justify-start items-center gap-3.5 hover:underline"
           >
@@ -62,14 +63,10 @@ const Hero = () => {
             <span className="text-[#191a15] text-base sm:text-lg font-medium font-[var(--font-sans)]">
               Join a Mentorship Program
             </span>
-          </a>
+          </Link>
         </div>
       </div>
-      <div
-        className="w-full max-w-[400px] sm:max-w-[500px] md:max-w-[600px] mt-6_SD
-
-System: 6 md:mt-0"
-      >
+      <div className="w-full max-w-[400px] sm:max-w-[500px] md:max-w-[600px] mt-6 md:mt-0">
         <Image
           src="/side-frame.png"
           width={600}

@@ -60,7 +60,7 @@ const TestimonialSection = () => {
               className="bg-white/10 backdrop-blur-sm rounded-lg p-6 sm:p-8 flex flex-col items-center gap-6 min-h-[300px]"
             >
               <p className="text-lg sm:text-xl font-normal font-[var(--font-sans)] leading-relaxed text-center text-white">
-                "{testimonials[currentIndex].quote}"
+                {testimonials[currentIndex].quote}
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 rounded-full overflow-hidden">
