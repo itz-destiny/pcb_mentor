@@ -8,18 +8,21 @@ const testimonials = [
       "PCB Mentor has been a game-changer for me. The practical advice and mentorship helped me finally understand PCB design, but more importantly, it gave me the confidence to start building real projects. Joseph makes learning electronics feel doable and exciting.",
     name: "Adebayo O",
     title: "Aspiring Electronics Engineer",
+    image: "/avatar-adebayo.jpeg",
   },
   {
     quote:
       "The mentorship program provided clear, actionable guidance that accelerated my learning. I went from struggling with schematics to designing my first PCB in weeks. The community support is incredible!",
     name: "Chinwe A",
     title: "Electronics Enthusiast",
+    image: "/avatar-chinwe.jpg",
   },
   {
     quote:
       "Joseph's teaching style is engaging and practical. The one-on-one sessions helped me refine my skills and land my first engineering role. PCB Mentor is a must for anyone serious about electronics.",
     name: "Emeka N",
     title: "Junior PCB Designer",
+    image: "/avatar-emeka.jpeg",
   },
 ];
 
@@ -65,7 +68,7 @@ const TestimonialSection = () => {
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 rounded-full overflow-hidden">
                   <Image
-                    src="/frame.png"
+                    src={testimonials[currentIndex].image}
                     alt={`${testimonials[currentIndex].name} Avatar`}
                     width={64}
                     height={64}
@@ -89,18 +92,14 @@ const TestimonialSection = () => {
             aria-label="Previous Testimonial"
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.2 }}
-          >
-            &lt;
-          </motion.button>
+          ></motion.button>
           <motion.button
             onClick={handleNext}
             className="absolute right-0 top-1/2 -translate-y-1/2 text-2xl font-bold font-[var(--font-sans)] text-white bg-white/10 rounded-full w-10 h-10 flex items-center justify-center hover:bg-white/20 transition-colors"
             aria-label="Next Testimonial"
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.2 }}
-          >
-            &gt;
-          </motion.button>
+          ></motion.button>
         </div>
       </div>
     </section>

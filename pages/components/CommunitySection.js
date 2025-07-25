@@ -17,10 +17,6 @@ const CommunitySection = () => {
           className="inline-flex items-center gap-2.5 text-[var(--color-primary)] text-xl font-normal hover:text-[#2a4b8c]"
         >
           Join the DevHeads IoT Community
-          <div className="flex gap-2">
-            <div className="w-1.5 h-3 border-2 border-[var(--color-primary)]" />
-            <div className="w-3 h-0.5 border-2 border-[var(--color-primary)]" />
-          </div>
         </a>
       </div>
 

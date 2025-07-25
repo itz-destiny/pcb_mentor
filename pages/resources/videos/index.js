@@ -2,28 +2,30 @@ import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/pages/components/Navbar";
 import Footer from "@/pages/components/Footer";
+import Image from "next/image";
+
 const VideosPage = () => {
   const videoContent = [
     {
       title: "Introduction to PCB Design for Beginners",
       description:
         "Get started with PCB design with this beginner-friendly tutorial. Covers basics, tools, and first steps.",
-      thumbnail: "https://placehold.co/800x450",
-      videoId: "intro-pcb-design",
+      thumbnail: "/video1.png",
+      videoId: "https://youtu.be/MsdJgEinb34?si=spBI0iPjomtyCr5a",
     },
     {
       title: "Mastering Circuit Simulation with Free Tools",
       description:
         "Learn how to simulate circuits using free software. Perfect for testing designs before prototyping.",
-      thumbnail: "https://placehold.co/800x450",
-      videoId: "circuit-simulation",
+      thumbnail: "/video2.png",
+      videoId: "https://youtu.be/V-E_VtQbx80",
     },
     {
       title: "Advanced PCB Layout Techniques",
       description:
         "Take your PCB skills to the next level with advanced layout tips and best practices.",
-      thumbnail: "https://placehold.co/800x450",
-      videoId: "advanced-layout",
+      thumbnail: "/video3.png",
+      videoId: "https://www.youtube.com/watch?v=V-E_VtQbx80",
     },
   ];
 
@@ -32,11 +34,13 @@ const VideosPage = () => {
       <Navbar />
       <main className="w-full flex flex-col justify-start items-center overflow-hidden">
         {/* Hero Section */}
-        <div className="w-full h-[400px] relative overflow-hidden">
-          <img
+        <div className="w-full h-[600px] relative overflow-hidden">
+          <Image
+            src="/video.jpeg"
+            alt="Materials Hero"
+            width={1440}
+            height={600}
             className="w-full h-full object-cover absolute top-0 left-0"
-            src="https://placehold.co/1440x400" // Replace with your hero image URL
-            alt="Videos Hero"
           />
           <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-black/70 to-transparent flex items-center">
             <motion.div
@@ -46,11 +50,10 @@ const VideosPage = () => {
               className="pl-8 sm:pl-12 lg:pl-16 text-left"
             >
               <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold font-[var(--font-sans)] leading-tight">
-                Video Tutorials Hub
+                Video Tutorials
               </h1>
               <p className="mt-2 text-white text-base sm:text-lg font-normal font-[var(--font-sans)] max-w-[600px]">
-                Unlock your potential with expert-led video tutorials tailored
-                for electronics engineers at every stage.
+                Have access to videos to aid your learning process
               </p>
             </motion.div>
           </div>

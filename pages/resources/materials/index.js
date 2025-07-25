@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/pages/components/Navbar";
 import Footer from "@/pages/components/Footer";
+import Image from "next/image";
 
 const MaterialsPage = () => {
   const materials = [
@@ -33,30 +34,31 @@ const MaterialsPage = () => {
       <Navbar />
       <main className="w-full flex flex-col justify-start items-center overflow-hidden">
         {/* Hero Section */}
-        <div className="w-full h-[393.04px] relative overflow-hidden">
-          <img
-            className="w-full h-full object-cover absolute top-0 left-0"
-            src="/material.jpg"
+        <div className="w-full h-[600px] relative overflow-hidden">
+          <Image
+            src="/material-bg.jpg"
             alt="Materials Hero"
+            width={1440}
+            height={600}
+            className="w-full h-full object-cover absolute top-0 left-0"
           />
-          <div className="w-full h-full absolute top-0 left-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-black/70 to-transparent flex items-center">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="w-[597px] flex flex-col justify-center items-center gap-4"
+              className="pl-8 sm:pl-12 lg:pl-16 text-left"
             >
-              <h1 className="text-center text-white text-5xl sm:text-6xl font-extrabold font-[var(--font-sans)] leading-[80.17px]">
+              <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold font-[var(--font-sans)] leading-tight">
                 Resource Materials
               </h1>
-              <p className="w-full text-center text-white text-base sm:text-lg font-normal font-[var(--font-sans)] leading-[26.96px]">
+              <p className="mt-2 text-white text-base sm:text-lg font-normal font-[var(--font-sans)] max-w-[600px]">
                 Access downloadable resources to support your learning and
                 projects in electronics engineering.
               </p>
             </motion.div>
           </div>
         </div>
-
         {/* Materials Content Section */}
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16 flex flex-col justify-start items-center gap-12 sm:gap-16">
           <motion.div
