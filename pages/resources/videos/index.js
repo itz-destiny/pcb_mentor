@@ -102,7 +102,9 @@ const VideosPage = () => {
                     </p>
                   </div>
                   <a
-                    href={`#${video.videoId}`} // Replace with actual video URL or player link
+                    href={video.videoId}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="mt-4 inline-block text-[#473bf0] text-sm sm:text-base font-medium font-[var(--font-sans)] leading-tight hover:underline"
                   >
                     Watch Now
