@@ -78,7 +78,7 @@ const AboutPage = () => {
               lesson? I needed a mentor, and I didn’t have one. That’s why I
               created PCB Mentor — to help students avoid the confusion I went
               through. PCB Mentor exists to guide, support, and simplify your
-              learning journey so you can focus on what really matters. You're
+              learning journey so you can focus on what really matters. You are
               not alone. Let’s build your future — together.
             </p>
           </div>
