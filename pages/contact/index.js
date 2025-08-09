@@ -71,10 +71,10 @@ const ContactPage = () => {
                 Email
               </h4>
               <a
-                href="mailto:josephogbonna860@gmail.com"
+                href="mailto:pcbdesignmentor@gmail.com"
                 className="text-[var(--color-foreground)] text-base sm:text-lg font-normal font-[var(--font-sans)] hover:text-[var(--color-primary)] transition-colors"
               >
-                josephogbonna860@gmail.com
+                pcbdesignmentor@gmail.com
               </a>
             </div>
             <div className="flex flex-col gap-4 sm:gap-5">

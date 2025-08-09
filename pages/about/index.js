@@ -61,11 +61,25 @@ const AboutPage = () => {
               Personal Journey
             </h2>
             <p className="w-full max-w-[660px] text-center text-[var(--color-text-secondary)] text-base sm:text-lg font-normal font-[var(--font-sans)] leading-normal">
-              PCB Mentor is a platform created to guide and empower electronics
-              engineers, especially beginners and intermediates. Whether
-              you&apos;re starting your journey or looking to level up, we
-              provide practical content and expert mentorship to help you
-              thrive.
+              My journey began at 13, when I couldn’t resist the urge to open up
+              every electronic gadget in my house — not to fix them, just to see
+              what was inside. I didn’t know what those tiny components did, but
+              I knew I was fascinated. Things got serious when I attended Niger
+              Delta Science School, where Electronics was taught as a subject.
+              That’s when I started building small projects like power banks,
+              chargers, and FM transmitters. At 17, I got into University of
+              Port Harcourt to study Electronics Engineering. But instead of
+              hands-on learning, I got a lot of theory and frustration —
+              something many students still face today. So I took matters into
+              my own hands. I started learning practical electronics and PCB
+              design on my own. With little guidance and too many online
+              distractions, it took me nearly two years to figure out what I
+              could’ve learned in six months — but it shaped me. The biggest
+              lesson? I needed a mentor, and I didn’t have one. That’s why I
+              created PCB Mentor — to help students avoid the confusion I went
+              through. PCB Mentor exists to guide, support, and simplify your
+              learning journey so you can focus on what really matters. You're
+              not alone. Let’s build your future — together.
             </p>
           </div>
         </motion.div>
@@ -81,7 +95,9 @@ const AboutPage = () => {
             Mission
           </h2>
           <p className="w-full max-w-[660px] text-center text-[var(--color-text-secondary)] text-base sm:text-lg font-normal font-[var(--font-sans)] leading-normal">
-            Helping engineers grow without overwhelm
+            To guide and empower aspiring electronics and PCB design engineers
+            through hands-on, mentorship-driven learning that builds real-world
+            skills and confidence.
           </p>
         </motion.div>
 
@@ -96,7 +112,8 @@ const AboutPage = () => {
             Vision
           </h2>
           <p className="w-full max-w-[660px] text-center text-[var(--color-text-secondary)] text-base sm:text-lg font-normal font-[var(--font-sans)] leading-normal">
-            Better, more human-centered electronics education
+            To be the go-to platform for practical electronics and PCB design
+            education, shaping the next generation of tech innovators
           </p>
         </motion.div>
       </main>

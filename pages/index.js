@@ -10,6 +10,7 @@ import CommunitySection from "./components/CommunitySection";
 import TestimonialSection from "./components/TestimonialSection";
 import CallToActionSection from "./components/CallToActionSection";
 import Footer from "./components/Footer";
+import TrustedCompanies from "./components/TrustedCompanies";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -56,23 +57,26 @@ export default function Home() {
       </AnimatedSection>
       <AnimatedSection index={2}>
         <Mission />
-      </AnimatedSection>
-      <AnimatedSection index={3}>
-        <LearningHub />
+        <AnimatedSection index={3}>
+          <TrustedCompanies />
+        </AnimatedSection>
       </AnimatedSection>
       <AnimatedSection index={4}>
-        <MentorshipSection />
+        <LearningHub />
       </AnimatedSection>
       <AnimatedSection index={5}>
-        <CommunitySection />
+        <MentorshipSection />
       </AnimatedSection>
       <AnimatedSection index={6}>
-        <TestimonialSection />
+        <CommunitySection />
       </AnimatedSection>
       <AnimatedSection index={7}>
-        <CallToActionSection />
+        <TestimonialSection />
       </AnimatedSection>
       <AnimatedSection index={8}>
+        <CallToActionSection />
+      </AnimatedSection>
+      <AnimatedSection index={9}>
         <Footer />
       </AnimatedSection>
     </div>

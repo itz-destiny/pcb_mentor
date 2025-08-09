@@ -13,10 +13,10 @@ const CommunitySection = () => {
           share progress, and grow with others who are on the same journey.
         </p>
         <a
-          href="#"
+          href="https://t.me/+tz9vGRtlt_czMDdk"
           className="inline-flex items-center gap-2.5 text-[var(--color-primary)] text-xl font-normal hover:text-[#2a4b8c]"
         >
-          Join the DevHeads IoT Community
+          Click here to join the DevHeads IoT Community
         </a>
       </div>
 
