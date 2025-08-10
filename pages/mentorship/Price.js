@@ -10,13 +10,13 @@ const featuresGroup = [
   "Structured 12-week syllabus",
   "Live group sessions & replays",
   "Software proficiency checkpoints",
-  "Hands‑on mini projects",
+  "Hands-on mini projects",
   "Peer learning community",
   "Certificate of completion",
 ];
 
 const featuresOneOnOne = [
-  "20‑week personalized roadmap",
+  "20-week personalized roadmap",
   "Weekly 1:1 coaching calls",
   "Code, schematic & layout reviews",
   "Career guidance & portfolio polish",
@@ -64,7 +64,7 @@ export default function Price() {
           className="mt-4 text-sm sm:text-base md:text-lg text-[var(--color-foreground,#374151)]/90 max-w-2xl mx-auto"
         >
           Choose a plan that matches your learning style—collaborative group
-          coaching or intensive one‑on‑one guidance.
+          coaching or intensive one-on-one guidance.
         </motion.p>
       </div>
 
@@ -98,12 +98,15 @@ export default function Price() {
               Collaborative learning with accountability and expert feedback.
             </p>
 
-            <div className="mt-6 flex items-end gap-3">
+            <div className="mt-6 flex items-baseline gap-2 flex-wrap">
               <span className="text-4xl sm:text-5xl font-extrabold text-[var(--color-primary)]">
                 $50
               </span>
-              <span className="text-sm text-[var(--color-foreground,#374151)]/60 mb-1">
-                one‑time
+              <span className="text-xl sm:text-2xl text-[#bfbfbf] line-through">
+                $100
+              </span>
+              <span className="text-sm text-[var(--color-foreground,#374151)]/60">
+                one-time
               </span>
             </div>
 
@@ -162,7 +165,7 @@ export default function Price() {
 
             <div className="flex items-center justify-between gap-4 relative z-10">
               <h3 className="text-2xl sm:text-3xl font-extrabold font-[var(--font-sans)]">
-                One‑on‑One Mentorship
+                One-on-One Mentorship
               </h3>
               <span className="inline-flex items-center rounded-full bg-white/15 text-white px-3 py-1 text-xs font-semibold backdrop-blur">
                 Pro
@@ -173,9 +176,12 @@ export default function Price() {
               Intensive, personalized coaching tailored to your goals and pace.
             </p>
 
-            <div className="mt-6 flex items-end gap-3 relative z-10">
+            <div className="mt-6 flex items-baseline gap-2 flex-wrap relative z-10">
               <span className="text-4xl sm:text-5xl font-extrabold">$399</span>
-              <span className="text-sm text-white/80 mb-1">one‑time</span>
+              <span className="text-xl sm:text-2xl text-white/70 line-through">
+                $500
+              </span>
+              <span className="text-sm text-white/80">one-time</span>
             </div>
 
             <div className="mt-6 grid gap-3 relative z-10">
@@ -194,7 +200,7 @@ export default function Price() {
               href="#"
               className="mt-8 w-full inline-flex justify-center items-center rounded-full px-4 py-3 text-sm sm:text-base font-bold font-[var(--font-sans)] text-[var(--color-primary)] bg-white shadow hover:shadow-md transition-shadow"
             >
-              Start One‑on‑One Mentorship
+              Start One-on-One Mentorship
               <svg
                 className="w-5 h-5 ml-2"
                 viewBox="0 0 24 24"
