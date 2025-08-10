@@ -41,7 +41,7 @@ const TrustedCompanies = () => {
               alt="Cady logo"
               width={150}
               height={48}
-              className="object-contain max-h-12 grayscale opacity-60 transition-opacity"
+              className="object-contain max-h-12  opacity-60 transition-opacity"
               priority
             />
           </motion.div>
@@ -60,7 +60,7 @@ const TrustedCompanies = () => {
               alt="PCBWay logo"
               width={150}
               height={48}
-              className="object-contain max-h-12 grayscale"
+              className="object-contain max-h-12 "
             />
           </motion.div>
         </div>

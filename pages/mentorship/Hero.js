@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -38,8 +39,8 @@ const Hero = () => {
             guidance designed to help you master PCB design and become a
             confident electronics engineer — no guesswork, no overwhelm.
           </p>
-          <a
-            href="/mentorship/apply"
+          <Link
+            href="/contact"
             className="px-6 py-3 bg-[var(--color-primary)] rounded-[40px] flex justify-center items-center gap-2.5 hover:bg-[#2a4b8c] transition-colors duration-200"
           >
             <span className="text-sm sm:text-base font-medium text-[#f8f8fa] font-[var(--font-sans)]">
@@ -59,7 +60,7 @@ const Hero = () => {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </motion.div>
     </div>

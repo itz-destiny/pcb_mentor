@@ -6,6 +6,7 @@ import TestimonialSection from "../components/TestimonialSection";
 import FAQSection from "./FAQSection";
 import CallToAction from "./CallToAction";
 import Footer from "../components/Footer";
+import CourseOutline from "./CourseOutline";
 
 const Index = () => {
   return (
@@ -13,6 +14,7 @@ const Index = () => {
       <Hero />
       <Mentorship />
       <Price />
+      <CourseOutline />
       <TestimonialSection />
       <FAQSection />
       <CallToAction />

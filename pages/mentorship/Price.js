@@ -1,114 +1,217 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-const Price = () => {
+const featuresGroup = [
+  "Structured 12-week syllabus",
+  "Live group sessions & replays",
+  "Software proficiency checkpoints",
+  "Hands‑on mini projects",
+  "Peer learning community",
+  "Certificate of completion",
+];
+
+const featuresOneOnOne = [
+  "20‑week personalized roadmap",
+  "Weekly 1:1 coaching calls",
+  "Code, schematic & layout reviews",
+  "Career guidance & portfolio polish",
+  "Priority chat support",
+  "Certificate of completion",
+];
+
+const Check = ({ className = "" }) => (
+  <svg
+    className={"w-5 h-5 flex-none " + className}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden
+  >
+    <path
+      d="M5 13l4 4L19 7"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export default function Price() {
   return (
-    <div className="w-full">
-      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col justify-start items-center gap-6">
+    <div className="w-full bg-[var(--color-background,#f9fafb)]">
+      {/* Header */}
+      <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center">
         <motion.h2
           initial="hidden"
           whileInView="visible"
-          variants={cardVariants}
-          viewport={{ once: true }}
-          className="w-full text-center text-[var(--color-primary)] text-3xl sm:text-4xl md:text-5xl font-extrabold font-[var(--font-sans)]"
+          viewport={{ once: true, amount: 0.6 }}
+          variants={fadeUp}
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--color-primary)] font-[var(--font-sans)]"
         >
-          Unlock your potential with our tailored PCB Mentorship
+          Level up your PCB skills with mentorship that fits you
         </motion.h2>
         <motion.p
           initial="hidden"
           whileInView="visible"
-          variants={cardVariants}
-          viewport={{ once: true }}
-          className="w-full text-center text-[var(--color-foreground)] text-sm sm:text-base md:text-lg font-normal font-[var(--font-sans)] leading-normal"
+          viewport={{ once: true, amount: 0.6 }}
+          variants={fadeUp}
+          className="mt-4 text-sm sm:text-base md:text-lg text-[var(--color-foreground,#374151)]/90 max-w-2xl mx-auto"
         >
-          Join our mentorship program and get the coaching you need to thrive in
-          PCB design.
+          Choose a plan that matches your learning style—collaborative group
+          coaching or intensive one‑on‑one guidance.
         </motion.p>
       </div>
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          variants={cardVariants}
-          viewport={{ once: true }}
-          className="w-full max-w-xl mx-auto text-center p-9 rounded-lg bg-white shadow-lg"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--color-primary)] font-[var(--font-sans)]">
-            Our Plan
-          </h2>
-          <div className="w-[140px] mx-auto mt-2 p-1 bg-[var(--color-primary)] rounded-full flex justify-center items-center">
-            <p className="text-white text-xs font-bold font-[var(--font-sans)] leading-none">
-              Duration - 8 weeks
-            </p>
-          </div>
-          <p className="mt-4 text-base sm:text-lg text-[var(--color-foreground)] font-normal font-[var(--font-sans)] leading-relaxed">
-            Our mentorship program is perfect for individuals who want to master
-            PCB design through a guided, hands-on approach.
-          </p>
-          <div className="mt-6 flex justify-center items-baseline gap-2">
-            <p className="text-4xl sm:text-5xl text-[var(--color-primary)] font-extrabold font-[var(--font-sans)]">
-              $50
-            </p>
-            <p className="text-4xl sm:text-5xl text-[#bfbfbf] font-normal font-[var(--font-sans)] line-through">
-              $100
-            </p>
-          </div>
-          <motion.a
+      {/* Cards */}
+      <div className="relative">
+        {/* subtle gradient accent */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 -top-20 h-40 bg-gradient-to-b from-[var(--color-primary,#2563eb)]/10 to-transparent"
+        />
+
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 grid lg:grid-cols-2 gap-6 lg:gap-8">
+          {/* Group Mentorship */}
+          <motion.div
             initial="hidden"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-6 w-[200px] mx-auto block p-2.5 rounded-full outline outline-1 outline-[var(--color-primary)] flex justify-center items-center gap-2 text-[var(--color-foreground)] text-lg font-bold font-[var(--font-sans)] leading-[25.16px] hover:bg-[var(--color-primary)] hover:text-white transition-colors duration-200"
-            href="#"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={fadeUp}
+            className="relative bg-white rounded-3xl shadow-sm ring-1 ring-black/5 p-6 sm:p-8 md:p-10 flex flex-col"
           >
-            Join Now
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <div className="flex items-center justify-between gap-4">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-primary)] font-[var(--font-sans)]">
+                Group Mentorship
+              </h3>
+              <span className="inline-flex items-center rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] px-3 py-1 text-xs font-semibold">
+                Popular
+              </span>
+            </div>
+
+            <p className="mt-3 text-[var(--color-foreground,#374151)]/90">
+              Collaborative learning with accountability and expert feedback.
+            </p>
+
+            <div className="mt-6 flex items-end gap-3">
+              <span className="text-4xl sm:text-5xl font-extrabold text-[var(--color-primary)]">
+                $50
+              </span>
+              <span className="text-sm text-[var(--color-foreground,#374151)]/60 mb-1">
+                one‑time
+              </span>
+            </div>
+
+            <div className="mt-6 grid gap-3">
+              {featuresGroup.map((f, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <Check className="text-[var(--color-primary)]" />
+                  <p className="text-sm sm:text-base text-[var(--color-foreground,#374151)]">
+                    {f}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <motion.a
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              href="#"
+              className="mt-8 w-full inline-flex justify-center items-center rounded-full px-4 py-3 text-sm sm:text-base font-bold font-[var(--font-sans)] text-white bg-[var(--color-primary)] shadow hover:shadow-md transition-shadow"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </motion.a>
-          <div className="mt-6 flex flex-col gap-2">
-            {[
-              "Software Proficiency",
-              "Feedback and Critique Checkpoints",
-              "Hands-On Experience",
-              "Personalized Advice from Experts",
-              "Certificate of Completion",
-              "Group Learning",
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial="hidden"
-                whileInView="visible"
-                variants={cardVariants}
-                viewport={{ once: true, amount: 0.5 }}
-                className="flex items-center gap-2"
+              Join Group Mentorship
+              <svg
+                className="w-5 h-5 ml-2"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
               >
-                <div className="w-4 h-4 bg-[var(--color-primary)] rounded-full" />
-                <p className="text-xs sm:text-sm text-[var(--color-foreground)] font-normal font-[var(--font-sans)] leading-relaxed">
-                  {item}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                <path
+                  d="M9 5l7 7-7 7"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </motion.a>
+          </motion.div>
+
+          {/* One-on-One Mentorship */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={fadeUp}
+            className="relative bg-[var(--color-primary)] text-white rounded-3xl shadow-xl p-6 sm:p-8 md:p-10 flex flex-col overflow-hidden"
+          >
+            {/* decorative blobs */}
+            <div
+              aria-hidden
+              className="absolute -top-16 -right-10 w-48 h-48 rounded-full bg-white/10 blur-2xl"
+            />
+            <div
+              aria-hidden
+              className="absolute -bottom-20 -left-10 w-56 h-56 rounded-full bg-white/10 blur-3xl"
+            />
+
+            <div className="flex items-center justify-between gap-4 relative z-10">
+              <h3 className="text-2xl sm:text-3xl font-extrabold font-[var(--font-sans)]">
+                One‑on‑One Mentorship
+              </h3>
+              <span className="inline-flex items-center rounded-full bg-white/15 text-white px-3 py-1 text-xs font-semibold backdrop-blur">
+                Pro
+              </span>
+            </div>
+
+            <p className="mt-3 text-white/90 relative z-10">
+              Intensive, personalized coaching tailored to your goals and pace.
+            </p>
+
+            <div className="mt-6 flex items-end gap-3 relative z-10">
+              <span className="text-4xl sm:text-5xl font-extrabold">$399</span>
+              <span className="text-sm text-white/80 mb-1">one‑time</span>
+            </div>
+
+            <div className="mt-6 grid gap-3 relative z-10">
+              {featuresOneOnOne.map((f, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <Check className="text-white" />
+                  <p className="text-sm sm:text-base text-white/95">{f}</p>
+                </div>
+              ))}
+            </div>
+
+            <motion.a
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              href="#"
+              className="mt-8 w-full inline-flex justify-center items-center rounded-full px-4 py-3 text-sm sm:text-base font-bold font-[var(--font-sans)] text-[var(--color-primary)] bg-white shadow hover:shadow-md transition-shadow"
+            >
+              Start One‑on‑One Mentorship
+              <svg
+                className="w-5 h-5 ml-2"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  d="M9 5l7 7-7 7"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </motion.a>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
-};
-
-export default Price;
+}
