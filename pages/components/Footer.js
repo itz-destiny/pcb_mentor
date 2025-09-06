@@ -5,14 +5,33 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const [showPopup, setShowPopup] = useState(false);
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email) {
+const handleSubscribe = async (e) => {
+  e.preventDefault();
+  if (!email) return;
+
+  try {
+    const res = await fetch("/api/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: "Anonymous", email }), // add real name if you add a field
+    });
+
+    const data = await res.json();
+    console.log("API response:", data);
+
+    if (res.ok) {
       setShowPopup(true);
       setEmail("");
       setTimeout(() => setShowPopup(false), 3000);
+    } else {
+      alert("Subscription failed: " + data.message);
     }
-  };
+  } catch (error) {
+    console.error("Client fetch error:", error);
+    alert("Error subscribing.");
+  }
+};
+
 
   return (
     <footer className="w-full bg-[#0e2650] py-12 sm:py-16 lg:py-20">

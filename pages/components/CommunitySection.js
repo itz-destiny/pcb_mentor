@@ -16,7 +16,7 @@ const CommunitySection = () => {
           href="https://t.me/+tz9vGRtlt_czMDdk"
           className="inline-flex items-center gap-2.5 text-[var(--color-primary)] text-xl font-normal hover:text-[#2a4b8c]"
         >
-          Click here to join the DevHeads IoT Community
+          Click here to Join PCB Mentor Community
         </a>
       </div>
 

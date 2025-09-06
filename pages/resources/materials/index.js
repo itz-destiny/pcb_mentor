@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Navbar from "@/pages/components/Navbar";
-import Footer from "@/pages/components/Footer";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import Image from "next/image";
 
 const MaterialsPage = () => {
@@ -11,20 +11,26 @@ const MaterialsPage = () => {
       description:
         "A comprehensive PDF guide for starting your PCB design journey.",
       fileUrl: "#", // Replace with actual PDF URL
+      imageUrl: "/material1.png", // Default image
+      previewUrl: "/preview1.jpg", // Hover image
       type: "PDF",
     },
     {
       title: "Circuit Simulation Cheat Sheet",
       description:
         "Quick reference guide for circuit simulation tools and techniques.",
-      fileUrl: "#", // Replace with actual PDF URL
+      fileUrl: "#",
+      imageUrl: "/material2.png",
+      previewUrl: "/preview2.jpg",
       type: "PDF",
     },
     {
       title: "Starter Project Templates",
       description:
         "Downloadable templates for your first electronics projects.",
-      fileUrl: "#", // Replace with actual file URL
+      fileUrl: "#",
+      imageUrl: "/material3.png",
+      previewUrl: "/preview3.jpg",
       type: "ZIP",
     },
   ];
@@ -33,32 +39,35 @@ const MaterialsPage = () => {
     <div className="w-full min-h-screen flex flex-col">
       <Navbar />
       <main className="w-full flex flex-col justify-start items-center overflow-hidden">
-        {/* Hero Section */}
-        <div className="w-full h-[600px] relative overflow-hidden">
-          <Image
-            src="/material-bg.jpg"
-            alt="Materials Hero"
-            width={1440}
-            height={600}
-            className="w-full h-full object-cover absolute top-0 left-0"
-          />
-          <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-black/70 to-transparent flex items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="pl-8 sm:pl-12 lg:pl-16 text-left"
-            >
-              <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold font-[var(--font-sans)] leading-tight">
-                Resource Materials
-              </h1>
-              <p className="mt-2 text-white text-base sm:text-lg font-normal font-[var(--font-sans)] max-w-[600px]">
-                Access downloadable resources to support your learning and
-                projects in electronics engineering.
-              </p>
-            </motion.div>
-          </div>
-        </div>
+{/* Hero Section */}
+<div className="w-full h-[600px] relative overflow-hidden flex items-center justify-center">
+  <Image
+    src="/material-bg.jpg"
+    alt="Materials Hero"
+    width={1440}
+    height={600}
+    className="w-full h-full object-cover absolute top-0 left-0"
+    priority
+  />
+  <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-black/70 to-transparent flex items-center justify-center">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="px-4 flex flex-col items-center text-center"
+    >
+      <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+        Resource Materials
+      </h1>
+      <p className="mt-4 text-white text-base sm:text-lg font-normal max-w-[600px]">
+        Access downloadable resources to support your learning and
+        projects in electronics engineering.
+      </p>
+    </motion.div>
+  </div>
+</div>
+
+
         {/* Materials Content Section */}
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16 flex flex-col justify-start items-center gap-12 sm:gap-16">
           <motion.div
@@ -67,14 +76,15 @@ const MaterialsPage = () => {
             viewport={{ once: true }}
             className="w-full flex flex-col justify-start items-center gap-5 sm:gap-6"
           >
-            <h2 className="w-full text-center text-[var(--color-primary)] text-4xl sm:text-5xl md:text-6xl font-extrabold font-[var(--font-sans)] leading-[70.40px]">
+            <h2 className="w-full text-center text-[var(--color-primary)] text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[70.40px]">
               Downloadable Resources
             </h2>
-            <p className="w-full max-w-[530px] text-center text-[var(--color-foreground)] text-base sm:text-lg font-normal font-[var(--font-sans)] leading-normal">
+            <p className="w-full text-center text-[var(--color-foreground)] text-base sm:text-lg font-normal leading-normal">
               Find essential guides, templates, and tools to accelerate your
               electronics engineering projects.
             </p>
           </motion.div>
+
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {materials.map((material, index) => (
               <motion.div
@@ -83,17 +93,38 @@ const MaterialsPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="w-full p-5 bg-[#f0f0f0] rounded-[13px] flex flex-col justify-start items-start gap-4"
+                className="group w-full p-5 bg-[#f0f0f0] rounded-[13px] flex flex-col justify-start items-center gap-4 shadow-md hover:shadow-lg transition-all duration-300"
               >
-                <h3 className="w-full text-center text-[var(--color-foreground)] text-lg sm:text-xl font-bold font-[var(--font-sans)] leading-relaxed">
+                {/* Image with hover swap */}
+                <div className="relative w-[150px] h-[150px]">
+                  {/* Default Image */}
+                  <Image
+                    src={material.imageUrl}
+                    alt={`${material.title} Cover`}
+                    fill
+                    className="rounded-md object-cover transition-opacity duration-300 group-hover:opacity-0"
+                  />
+                  {/* Hover Preview Image */}
+                  <Image
+                    src={material.previewUrl}
+                    alt={`${material.title} Preview`}
+                    fill
+                    className="rounded-md object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  />
+                </div>
+
+                {/* Title + Description */}
+                <h3 className="w-full text-center text-[var(--color-foreground)] text-lg sm:text-xl font-bold leading-relaxed">
                   {material.title}
                 </h3>
-                <p className="w-full text-center text-[var(--color-text-secondary)] text-sm sm:text-base font-normal font-[var(--font-sans)] leading-tight">
+                <p className="w-full text-center text-[var(--color-text-secondary)] text-sm sm:text-base font-normal leading-tight">
                   {material.description}
                 </p>
+
+                {/* Download Button */}
                 <a
-                  href={material.fileUrl} // Replace with actual file URL
-                  className="w-full inline-flex justify-center items-center px-4 py-2 bg-[var(--color-primary)] text-white text-sm sm:text-base font-medium font-[var(--font-sans)] rounded-[10px] hover:bg-opacity-90 transition-colors"
+                  href={material.fileUrl}
+                  className="w-full inline-flex justify-center items-center px-4 py-2 bg-[var(--color-primary)] text-white text-sm sm:text-base font-medium rounded-[10px] hover:bg-[var(--color-primary-dark)] transition-colors"
                 >
                   Download {material.type}
                 </a>

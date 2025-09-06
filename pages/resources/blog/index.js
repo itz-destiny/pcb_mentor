@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Navbar from "@/pages/components/Navbar";
-import Footer from "@/pages/components/Footer";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -52,10 +52,11 @@ const BlogPage = () => {
         <div className="w-full h-[600px] relative overflow-hidden">
           <Image
             src="/blog.png"
-            alt="Materials Hero"
+            alt="Blog Hero Banner"
             width={1440}
             height={600}
             className="w-full h-full object-cover absolute top-0 left-0"
+            priority
           />
           <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-black/70 to-transparent flex items-center justify-center">
             <motion.div
@@ -67,7 +68,7 @@ const BlogPage = () => {
               <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold font-[var(--font-sans)] leading-tight">
                 Learning Hub
               </h1>
-              <p className="mt-2 text-white text-base sm:text-lg font-normal font-[var(--font-sans)] max-w-[600px]">
+              <p className="mt-2 text-white text-base sm:text-lg font-normal font-[var(--font-sans)] max-w-[600px] mx-auto">
                 Explore practical content to help you grow as an engineer — from
                 beginner basics to career strategies.
               </p>
@@ -83,7 +84,7 @@ const BlogPage = () => {
             viewport={{ once: true }}
             className="w-full flex flex-col justify-start items-center gap-5 sm:gap-6"
           >
-            <h2 className="w-full text-center text-[var(--color-primary)] text-4xl sm:text-5xl md:text-6xl font-extrabold font-[var(--font-sans)] leading-[70.40px]">
+            <h2 className="w-full text-center text-[var(--color-primary)] text-2xl sm:text-3xl font-bold font-[var(--font-sans)]">
               Blog Posts
             </h2>
             <p className="w-full max-w-[530px] text-center text-[var(--color-foreground)] text-base sm:text-lg font-normal font-[var(--font-sans)] leading-normal">
@@ -91,6 +92,7 @@ const BlogPage = () => {
               beginner basics to career strategies.
             </p>
           </motion.div>
+
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {blogPosts.map((post, index) => (
               <motion.div
@@ -105,7 +107,7 @@ const BlogPage = () => {
                   <Image
                     src={post.image}
                     alt={post.title}
-                    width={300} // Adjust based on your image aspect ratio
+                    width={400}
                     height={215}
                     className="w-full h-full object-cover rounded-[17px]"
                   />
@@ -116,7 +118,7 @@ const BlogPage = () => {
                 <p className="w-full text-center text-[var(--color-foreground)] text-sm sm:text-base font-normal font-[var(--font-sans)] leading-tight">
                   {post.excerpt}
                 </p>
-                <div className="w-full inline-flex justify-start items-center gap-4 sm:gap-6">
+                <div className="w-full inline-flex justify-start items-center">
                   <Link
                     href={post.href}
                     className="text-[#473bf0] text-xs sm:text-sm font-normal font-[var(--font-sans)] leading-tight hover:underline"

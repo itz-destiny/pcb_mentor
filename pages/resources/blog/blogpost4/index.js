@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Navbar from "@/pages/components/Navbar";
-import Footer from "@/pages/components/Footer";
+import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 

@@ -23,18 +23,18 @@ const Hero = () => {
         initial="hidden"
         animate="visible"
         variants={sectionVariants}
-        className="w-full px-4 sm:px-6 lg:px-8 py-12 md:py-16 flex flex-col md:flex-row items-center md:items-start justify-between gap-12 md:gap-16 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]"
+        className="w-full px-4 sm:px-6 lg:px-8 py-12 md:py-16 flex flex-col items-center justify-center gap-6 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]"
         style={{
           backgroundImage: "url(/about_frame.png)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="w-full max-w-xl md:max-w-2xl flex flex-col justify-start items-center md:items-start gap-6">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white font-[var(--font-sans)] leading-tight text-center md:text-left">
+        <div className="w-full max-w-2xl flex flex-col justify-center items-center gap-6 text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white font-[var(--font-sans)] leading-tight">
             Hands-On PCB Mentorship to Accelerate Your Growth
           </h1>
-          <p className="text-sm sm:text-base font-normal text-white font-[var(--font-sans)] leading-normal text-center md:text-left">
+          <p className="text-sm sm:text-base font-normal text-white font-[var(--font-sans)] leading-normal">
             Learn faster and grow smarter with personalized, step-by-step
             guidance designed to help you master PCB design and become a
             confident electronics engineer — no guesswork, no overwhelm.

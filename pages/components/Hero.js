@@ -88,7 +88,7 @@ const Hero = () => {
             }}
           >
             <Link
-              href="/blog"
+              href="/mentorship"
               className="px-4 py-3 sm:px-6 sm:py-4 bg-[var(--color-primary)] rounded-[40px] flex justify-center items-center gap-2.5 hover:bg-[#2a4b8c] transition-colors duration-200"
             >
               <span className="text-white text-base sm:text-lg font-medium font-[var(--font-sans)]">

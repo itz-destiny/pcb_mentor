@@ -1,42 +1,30 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Navbar from "@/pages/components/Navbar";
-import Footer from "@/pages/components/Footer";
-import Image from "next/image";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import Script from "next/script";
+import { FaYoutube } from "react-icons/fa"; // YouTube icon
 
 const VideosPage = () => {
   const videoContent = [
     {
-      title: "Joseph Ogbonna — YouTube Channel",
-      description:
-        "Browse all tutorials, live sessions, and tips directly on Joseph’s YouTube channel.",
-      // Use any local image you have (e.g., a YouTube logo or channel banner)
-      thumbnail: "/video.webp",
-      videoId: "https://www.youtube.com/@josephogbonna860/videos",
-    },
-    {
       title: "Introduction to PCB Design for Beginners",
       description:
         "Get started with PCB design with this beginner-friendly tutorial. Covers basics, tools, and first steps.",
-      thumbnail: "/video1.png",
-      videoId: "https://youtu.be/MsdJgEinb34?si=spBI0iPjomtyCr5a",
+      videoId: "MsdJgEinb34",
     },
     {
       title: "Mastering Circuit Simulation with Free Tools",
       description:
         "Learn how to simulate circuits using free software. Perfect for testing designs before prototyping.",
-      thumbnail: "/video2.png",
-      videoId: "https://youtu.be/V-E_VtQbx80",
+      videoId: "V-E_VtQbx80",
     },
     {
       title: "Advanced PCB Layout Techniques",
       description:
         "Take your PCB skills to the next level with advanced layout tips and best practices.",
-      thumbnail: "/video3.png",
-      videoId: "https://www.youtube.com/watch?v=V-E_VtQbx80",
+      videoId: "V-E_VtQbx80",
     },
-    // NEW: Channel card
   ];
 
   return (
@@ -50,87 +38,70 @@ const VideosPage = () => {
       <Navbar />
       <main className="w-full flex flex-col justify-start items-center overflow-hidden">
         {/* Hero Section */}
-        <div className="w-full h-[600px] relative overflow-hidden">
-          <Image
-            src="/video.jpeg"
-            alt="Video Tutorials Hero"
-            width={1440}
-            height={600}
-            className="w-full h-full object-cover absolute top-0 left-0"
-          />
-          <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-black/70 to-transparent flex items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="pl-8 sm:pl-12 lg:pl-16 text-left"
-            >
-              <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold font-[var(--font-sans)] leading-tight">
-                Video Tutorials
-              </h1>
-              <p className="mt-2 text-white text-base sm:text-lg font-normal font-[var(--font-sans)] max-w-[600px]">
-                Have access to videos to aid your learning process
-              </p>
-            </motion.div>
-          </div>
+        <div className="w-full py-20 flex flex-col items-center justify-center bg-black text-center">
+          <FaYoutube className="text-red-600 w-20 h-20 sm:w-28 sm:h-28 mb-6" />
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="px-4"
+          >
+            <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold font-[var(--font-sans)] leading-tight">
+              Video Tutorials
+            </h1>
+            <p className="mt-2 text-white text-base sm:text-lg font-normal font-[var(--font-sans)] max-w-[600px] mx-auto">
+              Watch tutorials and walkthroughs directly on our site.
+            </p>
+          </motion.div>
         </div>
 
         {/* Video Content Section */}
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16 flex flex-col justify-start items-center gap-8 sm:gap-10">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16 flex flex-col justify-start items-center gap-12 sm:gap-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="w-full text-center"
+            className="w-full flex flex-col justify-start items-center gap-5 sm:gap-6"
           >
-            <h2 className="text-[var(--color-primary)] text-3xl sm:text-4xl md:text-5xl font-extrabold font-[var(--font-sans)]">
+            <h2 className="w-full text-center text-[var(--color-primary)] text-3xl sm:text-4xl md:text-5xl font-extrabold font-[var(--font-sans)]">
               Explore Our Video Collection
             </h2>
-            <p className="mt-2 text-[var(--color-foreground)] text-base sm:text-lg font-normal font-[var(--font-sans)] max-w-[530px] mx-auto">
-              Dive into a curated selection of videos to enhance your skills and
-              stay updated with the latest in electronics engineering.
+            <p className="w-full max-w-[530px] text-center text-[var(--color-foreground)] text-base sm:text-lg font-normal font-[var(--font-sans)] leading-normal">
+              Dive into curated videos to enhance your skills in electronics
+              engineering.
             </p>
           </motion.div>
 
-          <div className="w-full flex flex-col gap-6 sm:gap-8">
+          {/* Video Grid */}
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {videoContent.map((video, index) => (
               <motion.div
                 key={video.videoId}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.06 }}
-                className="w-full bg-white rounded-[15px] shadow-md overflow-hidden flex flex-col sm:flex-row items-start gap-4 sm:gap-6 p-4 sm:p-6 hover:shadow-lg transition-shadow"
+                transition={{ delay: index * 0.1 }}
+                className="w-full bg-white rounded-[15px] shadow-md overflow-hidden flex flex-col justify-start items-center p-4 hover:shadow-lg transition-shadow"
               >
-                <div className="w-full sm:w-[300px] h-[180px] overflow-hidden rounded-[10px]">
-                  <img
-                    className="w-full h-full object-cover rounded-[10px]"
-                    src={video.thumbnail}
-                    alt={video.title}
-                  />
+                {/* Square Video Embed */}
+                <div className="w-full aspect-square rounded-[10px] overflow-hidden">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video.videoId}`}
+                    title={video.title}
+                    className="w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
                 </div>
 
-                <div className="flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-[var(--color-foreground)] text-lg sm:text-xl font-bold font-[var(--font-sans)] leading-relaxed">
-                      {video.title}
-                    </h3>
-                    <p className="mt-2 text-[var(--color-text-secondary)] text-sm sm:text-base font-normal font-[var(--font-sans)] leading-tight">
-                      {video.description}
-                    </p>
-                  </div>
-
-                  <a
-                    href={video.videoId}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-block text-[#473bf0] text-sm sm:text-base font-medium font-[var(--font-sans)] leading-tight hover:underline"
-                  >
-                    {video.title.includes("YouTube Channel")
-                      ? "Open Channel"
-                      : "Watch Now"}
-                  </a>
-                </div>
+                {/* Title + Description */}
+                <h3 className="mt-4 text-center text-[var(--color-foreground)] text-lg sm:text-xl font-bold font-[var(--font-sans)] leading-relaxed border-b border-gray-300 pb-2 w-full">
+                  {video.title}
+                </h3>
+                <p className="mt-3 text-center text-[var(--color-text-secondary)] text-sm sm:text-base font-normal font-[var(--font-sans)] leading-tight">
+                  {video.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -150,12 +121,22 @@ const VideosPage = () => {
 
               {/* YouTube Subscribe Button */}
               <div className="flex items-center gap-4">
-                <div
-                  className="g-ytsubscribe"
-                  data-channel="josephogbonna860"
-                  data-layout="default"
-                  data-count="default"
-                />
+                <a
+                  href="https://www.youtube.com/@josephogbonna860"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-red-600 hover:bg-red-700 transition"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="white"
+                    className="w-8 h-8 sm:w-10 sm:h-10"
+                  >
+                    <path d="M23.498 6.186a2.974 2.974 0 0 0-2.093-2.106C19.383 3.5 12 3.5 12 3.5s-7.383 0-9.405.58a2.974 2.974 0 0 0-2.093 2.106C0 8.21 0 12 0 12s0 3.79.502 5.814a2.974 2.974 0 0 0 2.093 2.106C4.617 20.5 12 20.5 12 20.5s7.383 0 9.405-.58a2.974 2.974 0 0 0 2.093-2.106C24 15.79 24 12 24 12s0-3.79-.502-5.814zM9.75 15.02v-6.04L15.5 12l-5.75 3.02z" />
+                  </svg>
+                </a>
+
                 <a
                   href="https://www.youtube.com/@josephogbonna860/videos"
                   target="_blank"

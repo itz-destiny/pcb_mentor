@@ -1,75 +1,104 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const curriculum = [
+const groupCurriculum = [
   {
-    title: "Advanced Schematic Design",
+    title: "Introduction to Electronics & PCB Design",
     points: [
-      "Complex circuit schematics",
-      "Hierarchical design and organization",
+      "Basics of electronic components (resistors, capacitors, diodes, ICs).",
+      "Understanding what a PCB is and why it’s used.",
     ],
   },
   {
-    title: "Multilayer PCB Design",
+    title: "From Idea to Concept",
     points: [
-      "Principles of multilayer PCB design",
-      "Stack‑up planning and layer management",
+      "Turning an idea into a functional circuit.",
+      "Block diagrams and planning the circuit flow.",
     ],
   },
   {
-    title: "Signal Integrity",
+    title: "Schematic Design Fundamentals",
     points: [
-      "Understanding signal integrity issues",
-      "Techniques to mitigate SI problems",
+      "Using schematic capture tools (e.g., KiCAD).",
+      "Best practices for clean and readable schematics.",
     ],
   },
   {
-    title: "Power Integrity",
+    title: "Component Selection",
     points: [
-      "Ensuring stable power delivery",
-      "Power distribution network (PDN) design",
+      "How to choose the right components.",
+      "Reading datasheets, checking availability, cost, and footprint.",
     ],
   },
   {
-    title: "PCB Impedance Matching",
+    title: "Footprints & Libraries",
     points: [
-      "Basics of impedance and its importance",
-      "Techniques for impedance matching in PCB design",
+      "Understanding PCB footprints.",
+      "Creating and managing component libraries.",
     ],
   },
   {
-    title: "Design for Manufacturability (DFM)",
+    title: "PCB Layout Basics",
     points: [
-      "Guidelines to ensure manufacturability",
-      "Avoiding common design pitfalls",
+      "Translating schematic to PCB.",
+      "Placement rules: signal flow, decoupling capacitors near ICs, grounding.",
     ],
   },
   {
-    title: "Thermal Management",
+    title: "Routing Techniques",
     points: [
-      "Techniques for managing heat in PCB design",
-      "Thermal vias, heatsinks, and cooling solutions",
+      "Single-layer vs multi-layer routing.",
+      "Power, signal, and ground trace considerations.",
+      "Introduction to differential pairs and impedance control (basic overview).",
     ],
   },
   {
-    title: "High‑Speed PCB Design",
+    title: "Design Rule Check (DRC) & Electrical Rule Check (ERC)",
     points: [
-      "Designing for high‑speed signals",
-      "Minimizing electromagnetic interference (EMI)",
+      "Setting up rules (clearance, trace width, via size).",
+      "Debugging DRC/ERC errors.",
     ],
   },
   {
-    title: "Project‑Based Learning",
+    title: "Generating Manufacturing Files",
     points: [
-      "Hands‑on projects to apply design principles",
-      "Real‑world scenarios and problem‑solving",
+      "Gerber files, drill files, BOM, Pick & Place files.",
+      "Preparing files for PCB manufacturer.",
     ],
   },
   {
-    title: "Career Growth & Industry Insights",
+    title: "DFM (Design for Manufacturing) & Assembly Considerations",
     points: [
-      "Career advancement opportunities in PCB design",
-      "Building a portfolio & interview prep",
+      "Designing with manufacturability in mind.",
+      "Avoiding common mistakes (e.g., small vias, wrong footprints, tight spacing).",
+      "Basic assembly guidelines for soldering and production.",
+    ],
+  },
+];
+
+const oneOnOneTracks = [
+  {
+    title: "Option A: Beginner Track (From Scratch)",
+    points: [
+      "Covers the entire beginner curriculum (like group, but more intensive).",
+      "Hands-on project: student designs a complete PCB from idea → fabrication.",
+      "Extra guidance on troubleshooting mistakes & personal project discussions.",
+    ],
+  },
+  {
+    title: "Option B: Skill Upgrade Track (Intermediate to Advanced)",
+    points: [
+      "Advanced routing (impedance control, length matching, differential pairs).",
+      "High-speed design considerations.",
+      "Power supply design best practices.",
+      "DFM & DFA (Design for Assembly).",
+    ],
+  },
+  {
+    title: "Option C: Specialized/Custom Track",
+    points: [
+      "Tailored to the learner’s personal goals.",
+      "Examples: IoT device PCB design, automotive/industrial PCB design, compact SMD design, product development.",
     ],
   },
 ];
@@ -80,7 +109,10 @@ const fadeUp = {
 };
 
 export default function CourseOutline() {
+  const [activeTab, setActiveTab] = useState("group");
   const [open, setOpen] = useState(0);
+
+  const curriculum = activeTab === "group" ? groupCurriculum : oneOnOneTracks;
 
   return (
     <section className="w-full bg-[var(--color-background,#f8fafc)]">
@@ -102,9 +134,39 @@ export default function CourseOutline() {
           variants={fadeUp}
           className="mt-3 text-sm sm:text-base md:text-lg text-[var(--color-foreground,#334155)]/90 max-w-2xl mx-auto"
         >
-          A practical, industry‑ready PCB design curriculum — from multilayer
-          fundamentals to high‑speed, SI/PI and DFM best practices.
+          Explore structured outlines for both group and one-on-one mentorship
+          tracks.
         </motion.p>
+
+        {/* Tabs */}
+        <div className="mt-6 flex justify-center gap-4">
+          <button
+            onClick={() => {
+              setActiveTab("group");
+              setOpen(0);
+            }}
+            className={`px-5 py-2 rounded-full font-bold ${
+              activeTab === "group"
+                ? "bg-[var(--color-primary)] text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
+          >
+            Group Mentorship
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab("oneOnOne");
+              setOpen(0);
+            }}
+            className={`px-5 py-2 rounded-full font-bold ${
+              activeTab === "oneOnOne"
+                ? "bg-[var(--color-primary)] text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
+          >
+            One-on-One Mentorship
+          </button>
+        </div>
       </div>
 
       {/* Outline */}
@@ -192,66 +254,6 @@ export default function CourseOutline() {
             </li>
           ))}
         </ul>
-      </div>
-
-      {/* Platform + Enrollment */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="rounded-3xl bg-white ring-1 ring-black/5 shadow-sm p-6 sm:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] grid place-items-center">
-              {/* Teams Icon */}
-              <svg
-                viewBox="0 0 48 48"
-                className="w-7 h-7"
-                fill="currentColor"
-                aria-hidden
-              >
-                <path d="M29 6a6 6 0 110 12 6 6 0 010-12zM41 10a4 4 0 110 8 4 4 0 010-8z" />
-                <rect
-                  x="8"
-                  y="18"
-                  width="24"
-                  height="20"
-                  rx="6"
-                  ry="6"
-                  opacity=".3"
-                />
-                <path d="M22 24h-4v11h-3V24H11v-3h11v3z" />
-              </svg>
-            </div>
-            <div>
-              <h4 className="text-lg sm:text-xl font-extrabold text-[var(--color-foreground,#0f172a)] font-[var(--font-sans)]">
-                All classes & resources on Microsoft Teams
-              </h4>
-              <p className="mt-1 text-sm text-[var(--color-foreground,#334155)]/80">
-                Access is granted once payment is confirmed. You’ll receive your
-                Teams invite and course workspace within 24 hours of enrollment.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a
-              href="https://t.me/+tz9vGRtlt_czMDdk"
-              className="inline-flex justify-center items-center rounded-full px-5 py-3 text-sm font-bold text-white bg-[var(--color-primary)] shadow hover:shadow-md"
-            >
-              Enroll Now
-              <svg
-                className="w-5 h-5 ml-2"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path
-                  d="M9 5l7 7-7 7"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
       </div>
     </section>
   );
