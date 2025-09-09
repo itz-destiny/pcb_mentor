@@ -13,7 +13,7 @@ const handleSubscribe = async (e) => {
     const res = await fetch("/api/subscribe", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: "Anonymous", email }), // add real name if you add a field
+      body: JSON.stringify({ name: "Engineer", email }), // add real name if you add a field
     });
 
     const data = await res.json();
