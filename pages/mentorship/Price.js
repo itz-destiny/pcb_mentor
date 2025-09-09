@@ -125,7 +125,7 @@ export default function Price() {
               initial={{ scale: 1 }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              href="#"
+              href="https://selar.com/u42071"
               className="mt-8 w-full inline-flex justify-center items-center rounded-full px-4 py-3 text-sm sm:text-base font-bold font-[var(--font-sans)] text-white bg-[var(--color-primary)] shadow hover:shadow-md transition-shadow"
             >
               Join Group Mentorship
@@ -197,7 +197,7 @@ export default function Price() {
               initial={{ scale: 1 }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              href="#"
+              href="/contact"
               className="mt-8 w-full inline-flex justify-center items-center rounded-full px-4 py-3 text-sm sm:text-base font-bold font-[var(--font-sans)] text-[var(--color-primary)] bg-white shadow hover:shadow-md transition-shadow"
             >
               Start One-on-One Mentorship

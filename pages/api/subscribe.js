@@ -1,60 +1,74 @@
 // pages/api/subscribe.js
 import { createClient } from "@supabase/supabase-js";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY // must be service role key, not anon
 );
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  const { name, email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ error: "Email is required" });
+  }
+
+  // Try inserting subscriber
+  const { data, error } = await supabase
+    .from("subscribers")
+    .insert([{ name: name || "Anonymous", email }]);
+
+  if (error) {
+    console.error("❌ Supabase error:", error);
+    return res.status(400).json({ error: error.message });
+  }
+
+  return res.status(200).json({ message: "Subscribed successfully!", data });
+}
+
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
     const { name, email } = req.body;
 
     if (!email) {
-      return res.status(400).json({ message: "Email is required" });
+      return res.status(400).json({ error: "Email is required" });
     }
 
-    // 1. Save subscriber in Supabase
-    const { error } = await supabase
-      .from("subscribers")
-      .insert([{ name, email }]);
-
-    if (error) {
-      console.error("❌ Supabase error:", error);
-      return res.status(400).json({ message: error.message });
-    }
-
-    // 2. Send welcome email
-    const { data, error: emailError } = await resend.emails.send({
-      from: "PCB Mentor <onboarding@resend.dev>", // ✅ use this until domain is verified
-      to: email,
-      subject: "🎉 Welcome to PCB Mentor!",
-      html: `
-        <div style="font-family: Arial, sans-serif; color: #111; line-height: 1.5;">
-          <h2 style="color: #2563eb;">Welcome, ${name || "Engineer"} 🎉</h2>
-          <p>Thanks for subscribing to <strong>PCB Mentor</strong>.</p>
-          <p>You’ll now get exclusive tips, resources, and project guides delivered straight to your inbox 🚀.</p>
-          <p>Happy building,<br><strong>The PCB Mentor Team</strong></p>
-        </div>
-      `,
+    // Setup Nodemailer
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      secure: true, // true if port = 465
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
     });
 
-    if (emailError) {
-      console.error("❌ Resend error:", emailError);
-      return res.status(400).json({ message: emailError.message });
-    }
+    // Verify connection
+    await transporter.verify();
 
-    console.log("✅ Subscription successful:", email);
-    return res.status(200).json({ message: "Subscribed successfully!" });
+    // Send email
+    await transporter.sendMail({
+      from: `"PCB Mentor" <${process.env.SMTP_USER}>`,
+      to: email,
+      subject: "🎉 Welcome to PCB Mentor!",
+      html: `<h2>Welcome, ${name || "Engineer"} 🎉</h2><p>Thanks for subscribing!</p>`,
+    });
+
+    console.log("✅ Email sent:", email);
+    return res.status(200).json({ message: "Welcome email sent successfully!" });
   } catch (err) {
-    console.error("❌ API crashed:", err);
-    return res.status(500).json({ message: err.message });
+    console.error("💥 Nodemailer error:", err);
+    return res.status(500).json({ error: err.message || "Failed to send email" });
   }
 }

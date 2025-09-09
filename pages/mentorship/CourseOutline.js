@@ -103,6 +103,90 @@ const oneOnOneTracks = [
   },
 ];
 
+const intermediateCurriculum = [
+  {
+    title: "Project Planning & Requirements Definition",
+    points: [
+      "Define the project (e.g., IoT device, power module, controller board).",
+      "Set goals: size, layers, power requirements, communication needs.",
+      "Create a block diagram and system overview.",
+    ],
+  },
+  {
+    title: "Advanced Schematic Design",
+    points: [
+      "Best practices for large schematics (hierarchical sheets).",
+      "Adding test points, connectors, and design notes.",
+      "Incorporating communication interfaces into schematics.",
+    ],
+  },
+  {
+    title: "Component Selection & Footprint Strategy",
+    points: [
+      "Selecting ICs, connectors, passives for performance and reliability.",
+      "Checking availability, cost, and alternative sourcing.",
+      "Matching footprints to manufacturing requirements.",
+    ],
+  },
+  {
+    title: "Multilayer PCB Design & Stack-up",
+    points: [
+      "When and why to use 4-layer+ PCBs.",
+      "Layer stack-up planning (signal, power, ground distribution).",
+      "Separation of analog and digital sections.",
+    ],
+  },
+  {
+    title: "Power Integrity (PI)",
+    points: [
+      "Designing stable power delivery networks.",
+      "Decoupling capacitor strategies and placement.",
+      "Power planes, IR drop, and low-impedance paths.",
+    ],
+  },
+  {
+    title: "Signal Integrity & Impedance Control",
+    points: [
+      "Understanding controlled impedance traces.",
+      "Differential pair basics (for USB, CAN, Ethernet).",
+      "Crosstalk and spacing strategies in multilayer boards.",
+    ],
+  },
+  {
+    title: "Communication Protocols in PCB Design",
+    points: [
+      "Implementing UART, SPI, I²C, CAN, and USB interfaces.",
+      "Layout considerations for each protocol.",
+      "Pull-up resistors, termination resistors, and filtering.",
+    ],
+  },
+  {
+    title: "Thermal Management & Reliability Design",
+    points: [
+      "Handling heat for power devices.",
+      "Thermal vias, copper pours, and heatsinking.",
+      "Designing for long-term reliability.",
+    ],
+  },
+  {
+    title: "Design for Manufacturability (DFM) & Assembly (DFA)",
+    points: [
+      "Via types (through-hole, blind, buried, via-in-pad).",
+      "Solder mask, silkscreen, and assembly notes.",
+      "Preparing files for cost-effective manufacturing.",
+    ],
+  },
+  {
+    title: "Project Execution: Layout & Final Deliverables",
+    points: [
+      "Apply all principles into the chosen project.",
+      "Complete schematic → layout → DRC/ERC checks.",
+      "Generate Gerbers, BOM, and Assembly files.",
+      "Mentor review of the final project for manufacturability.",
+    ],
+  },
+];
+
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.35 } },
@@ -112,7 +196,12 @@ export default function CourseOutline() {
   const [activeTab, setActiveTab] = useState("group");
   const [open, setOpen] = useState(0);
 
-  const curriculum = activeTab === "group" ? groupCurriculum : oneOnOneTracks;
+  const curriculum =
+    activeTab === "group"
+      ? groupCurriculum
+      : activeTab === "oneOnOne"
+      ? oneOnOneTracks
+      : intermediateCurriculum;
 
   return (
     <section className="w-full bg-[var(--color-background,#f8fafc)]">
@@ -134,12 +223,11 @@ export default function CourseOutline() {
           variants={fadeUp}
           className="mt-3 text-sm sm:text-base md:text-lg text-[var(--color-foreground,#334155)]/90 max-w-2xl mx-auto"
         >
-          Explore structured outlines for both group and one-on-one mentorship
-          tracks.
+          Explore structured outlines for group, one-on-one, and intermediate mentorship tracks.
         </motion.p>
 
         {/* Tabs */}
-        <div className="mt-6 flex justify-center gap-4">
+        <div className="mt-6 flex justify-center gap-4 flex-wrap">
           <button
             onClick={() => {
               setActiveTab("group");
@@ -165,6 +253,19 @@ export default function CourseOutline() {
             }`}
           >
             One-on-One Mentorship
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab("intermediate");
+              setOpen(0);
+            }}
+            className={`px-5 py-2 rounded-full font-bold ${
+              activeTab === "intermediate"
+                ? "bg-[var(--color-primary)] text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
+          >
+            Intermediate Mentorship
           </button>
         </div>
       </div>

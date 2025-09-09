@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion"; // Import AnimatePresence
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -12,6 +12,7 @@ const ContactPage = () => {
   });
 
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,10 +24,37 @@ const ContactPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShowSuccessPopup(true);
-    setFormData({ name: "", email: "", service: "", message: "" });
-    const serviceSelect = document.querySelector('select[name="service"]');
-    if (serviceSelect) serviceSelect.style.color = "#b2b2b2";
+
+    const { name, email, service, message } = formData;
+
+    // Build mailto link
+    const subject = encodeURIComponent(`New Contact Form Submission - ${service}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`
+    );
+    const mailtoLink = `mailto:pcbdesignmentor@gmail.com?subject=${subject}&body=${body}`;
+
+    try {
+      // Try to open default mail client
+      window.location.href = mailtoLink;
+
+      // Success popup
+      setPopupMessage("✅ Your message has been sent successfully.");
+      setShowSuccessPopup(true);
+
+      // Reset form
+      setFormData({ name: "", email: "", service: "", message: "" });
+      const serviceSelect = document.querySelector('select[name="service"]');
+      if (serviceSelect) serviceSelect.style.color = "#b2b2b2";
+    } catch (err) {
+      console.error("❌ Mail client not available:", err);
+
+      // Fallback popup
+      setPopupMessage(
+        "⚠️ It seems your system doesn’t have a default email app configured.\n\nPlease email us directly at pcbdesignmentor@gmail.com"
+      );
+      setShowSuccessPopup(true);
+    }
   };
 
   return (
@@ -56,7 +84,7 @@ const ContactPage = () => {
           viewport={{ once: true }}
           className="w-full flex flex-col md:flex-row justify-center items-start gap-12 sm:gap-16"
         >
-          {/* --- RESTORED: Contact Info & Socials Section --- */}
+          {/* Contact Info & Socials Section */}
           <div className="flex-1 flex flex-col justify-start items-start gap-8 sm:gap-10">
             <div className="flex flex-col gap-4 sm:gap-5">
               <h3 className="text-[var(--color-primary)] text-2xl sm:text-3xl font-extrabold font-[var(--font-sans)]">
@@ -104,10 +132,7 @@ const ContactPage = () => {
 
           {/* Contact Form */}
           <div className="flex-1 w-full max-w-md">
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-6 sm:gap-8"
-            >
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-8">
               <div className="flex flex-col gap-3 sm:gap-4">
                 <label className="text-[var(--color-foreground)] text-xs sm:text-sm font-normal font-[var(--font-sans)]">
                   Name
@@ -145,9 +170,7 @@ const ContactPage = () => {
                     onChange={handleChange}
                     className="w-full h-12 bg-[#f7f7f7] rounded-[10px] px-4 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] appearance-none"
                     style={{
-                      color: formData.service
-                        ? "var(--color-foreground)"
-                        : "#b2b2b2",
+                      color: formData.service ? "var(--color-foreground)" : "#b2b2b2",
                     }}
                     required
                   >
@@ -201,7 +224,7 @@ const ContactPage = () => {
       </main>
       <Footer />
 
-      {/* Success Popup */}
+      {/* Success / Fallback Popup */}
       <AnimatePresence>
         {showSuccessPopup && (
           <motion.div
@@ -220,10 +243,10 @@ const ContactPage = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-2xl font-bold text-[var(--color-primary)]">
-                Success!
+                Notice
               </h3>
-              <p className="mt-4 text-lg text-[var(--color-foreground)]">
-                Your message has been sent successfully.
+              <p className="mt-4 text-lg text-[var(--color-foreground)] whitespace-pre-line">
+                {popupMessage}
               </p>
               <button
                 onClick={() => setShowSuccessPopup(false)}
