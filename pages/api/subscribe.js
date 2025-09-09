@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     // 1. Insert subscriber into Supabase
     const { data, error } = await supabase
       .from("subscribers")
-      .insert([{ name: name || "Anonymous", email }]);
+      .insert([{ name: name || "Engineer", email }]);
 
     if (error) {
       console.error("❌ Supabase error:", error);
