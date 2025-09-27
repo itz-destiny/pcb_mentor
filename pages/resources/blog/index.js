@@ -1,48 +1,78 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
+import { supabase, isSupabaseConfigured } from "../../../lib/supabase";
 
 const BlogPage = () => {
-  const blogPosts = [
-    {
-      title: "5 Smart Ways to Kickstart Your Electronics Engineering Career",
-      excerpt:
-        "Feeling stuck or unsure where to begin? These five practical tips will help you build direction, confidence, and traction as a beginner engineer.",
-      image: "/M1.png",
-      href: "/resources/blog/blogpost1",
-    },
-    {
-      title: "Top 3 Free PCB Design Tools for Beginners (And How to Use Them)",
-      excerpt:
-        "Start designing today with these beginner-friendly tools. This guide walks you through setup, workflow, and key features to try.",
-      image: "/M2.png",
-      href: "/resources/blog/blogpost2",
-    },
-    {
-      title: "From Doubt to Confidence: The Engineer’s Mindset Shift",
-      excerpt:
-        "Imposter syndrome is real — but beatable. Learn the mindset shifts that helped me go from self-doubt to building my first real project.",
-      image: "/M5.png",
-      href: "/resources/blog/blogpost3",
-    },
-    {
-      title: "Build Your First Circuit: Blinking LED with a 555 Timer",
-      excerpt:
-        "An easy, beginner-friendly project that introduces you to timers, breadboards, and fun hands-on learning with real results.",
-      image: "/M3.png",
-      href: "/resources/blog/blogpost4",
-    },
-    {
-      title: "Avoid These 7 Common PCB Layout Mistakes",
-      excerpt:
-        "Bad traces, noisy power lines, wrong footprints — learn how to avoid rookie errors in your next PCB layout with this checklist.",
-      image: "/M4.png",
-      href: "/resources/blog/blogpost5",
-    },
-  ];
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!isSupabaseConfigured || !supabase) {
+      console.warn('Supabase not configured, showing empty state');
+      setLoading(false);
+      return;
+    }
+
+    loadBlogPosts();
+    
+    // Set up real-time subscription
+    const subscription = supabase
+      .channel('blog-posts-changes')
+      .on('postgres_changes', 
+        { 
+          event: '*', 
+          schema: 'public', 
+          table: 'blog_posts' 
+        }, 
+        (payload) => {
+          console.log('Blog post change received!', payload);
+          loadBlogPosts(); // Reload posts when changes occur
+        })
+      .subscribe();
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const loadBlogPosts = async () => {
+    try {
+      console.log('Loading blog posts...');
+      
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('published', true)
+        .order('publish_date', { ascending: false });
+
+      if (error) {
+        console.error('Database error:', error);
+        throw error;
+      }
+      
+      console.log('Blog posts loaded:', data);
+      setBlogPosts(data || []);
+    } catch (error) {
+      console.error('Error loading blog posts:', error);
+      // Show all posts if there's an error (for debugging)
+      try {
+        const { data: allData } = await supabase
+          .from('blog_posts')
+          .select('*')
+          .order('created_at', { ascending: false });
+        console.log('All blog posts (including unpublished):', allData);
+        setBlogPosts(allData || []);
+      } catch (fallbackError) {
+        console.error('Fallback query failed:', fallbackError);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="w-full min-h-screen flex flex-col">
@@ -93,8 +123,13 @@ const BlogPage = () => {
             </p>
           </motion.div>
 
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {blogPosts.map((post, index) => (
+          {loading ? (
+            <div className="w-full flex justify-center items-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--color-primary)]"></div>
+            </div>
+          ) : (
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {blogPosts.map((post, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -105,7 +140,7 @@ const BlogPage = () => {
               >
                 <div className="w-full h-[215px] overflow-hidden rounded-[17px]">
                   <Image
-                    src={post.image}
+                    src={post.image || "/M1.png"}
                     alt={post.title}
                     width={400}
                     height={215}
@@ -120,15 +155,16 @@ const BlogPage = () => {
                 </p>
                 <div className="w-full inline-flex justify-start items-center">
                   <Link
-                    href={post.href}
+                    href={`/resources/blog/${post.slug}`}
                     className="text-[#473bf0] text-xs sm:text-sm font-normal font-[var(--font-sans)] leading-tight hover:underline"
                   >
                     Read More
                   </Link>
                 </div>
               </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </main>
       <Footer />

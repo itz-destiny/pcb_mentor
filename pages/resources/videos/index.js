@@ -1,31 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Script from "next/script";
-import { FaYoutube } from "react-icons/fa"; // YouTube icon
+import { FaYoutube } from "react-icons/fa";
+import { supabase } from "../../../lib/supabase";
 
 const VideosPage = () => {
-  const videoContent = [
-    {
-      title: "Introduction to PCB Design for Beginners",
-      description:
-        "Get started with PCB design with this beginner-friendly tutorial. Covers basics, tools, and first steps.",
-      videoId: "MsdJgEinb34",
-    },
-    {
-      title: "Mastering Circuit Simulation with Free Tools",
-      description:
-        "Learn how to simulate circuits using free software. Perfect for testing designs before prototyping.",
-      videoId: "V-E_VtQbx80",
-    },
-    {
-      title: "Advanced PCB Layout Techniques",
-      description:
-        "Take your PCB skills to the next level with advanced layout tips and best practices.",
-      videoId: "V-E_VtQbx80",
-    },
-  ];
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    loadVideos();
+
+    // Set up real-time subscription
+    const subscription = supabase
+      .channel('videos-changes')
+      .on('postgres_changes', 
+        { 
+          event: '*', 
+          schema: 'public', 
+          table: 'videos' 
+        }, 
+        (payload) => {
+          console.log('Change received!', payload);
+          loadVideos(); // Reload videos when changes occur
+        })
+      .subscribe();
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const loadVideos = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('videos')
+        .select('*')
+        .eq('is_active', true)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setVideos(data);
+    } catch (error) {
+      console.error('Error loading videos:', error);
+    }
+  };
 
   return (
     <div className="w-full min-h-screen flex flex-col">
@@ -74,9 +94,9 @@ const VideosPage = () => {
 
           {/* Video Grid */}
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {videoContent.map((video, index) => (
+            {videos.map((video, index) => (
               <motion.div
-                key={video.videoId}
+                key={video.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -96,12 +116,14 @@ const VideosPage = () => {
                 </div>
 
                 {/* Title + Description */}
-                <h3 className="mt-4 text-center text-[var(--color-foreground)] text-lg sm:text-xl font-bold font-[var(--font-sans)] leading-relaxed border-b border-gray-300 pb-2 w-full">
-                  {video.title}
-                </h3>
-                <p className="mt-3 text-center text-[var(--color-text-secondary)] text-sm sm:text-base font-normal font-[var(--font-sans)] leading-tight">
-                  {video.description}
-                </p>
+                <a href={`/resources/videos/${video.id}`} className="block">
+                  <h3 className="mt-4 text-center text-[var(--color-foreground)] text-lg sm:text-xl font-bold font-[var(--font-sans)] leading-relaxed border-b border-gray-300 pb-2 w-full hover:text-[var(--color-primary)] transition-colors">
+                    {video.title}
+                  </h3>
+                  <p className="mt-3 text-center text-[var(--color-text-secondary)] text-sm sm:text-base font-normal font-[var(--font-sans)] leading-tight">
+                    {video.description}
+                  </p>
+                </a>
               </motion.div>
             ))}
           </div>

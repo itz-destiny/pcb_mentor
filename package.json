@@ -6,9 +6,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "node scripts/seed-database.js",
+    "test-db": "node test-supabase-connection.js",
+    "clear-demo": "node scripts/clear-demo-data.js"
   },
   "dependencies": {
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/supabase-js": "^2.57.0",
     "bcryptjs": "^3.0.2",
     "framer-motion": "^12.23.7",
@@ -25,6 +29,7 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/react": "19.1.12",
+    "dotenv": "^16.6.1",
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
     "tailwindcss": "^4"

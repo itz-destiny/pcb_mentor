@@ -14,7 +14,7 @@ const ResourcesPage = () => {
             "5 Smart Ways to Kickstart Your Electronics Engineering Career",
           description:
             "Feeling stuck or unsure where to begin? These five practical tips will help you build direction, confidence, and traction as a beginner engineer.",
-          link: "/resources/blog/blogpost1",
+          link: "/resources/blog/kickstart-electronics-engineering-career",
         },
         {
           title:

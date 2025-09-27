@@ -1,39 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Image from "next/image";
+import { supabase } from "../../../lib/supabase";
 
 const MaterialsPage = () => {
-  const materials = [
-    {
-      title: "PCB Design Beginner Guide",
-      description:
-        "A comprehensive PDF guide for starting your PCB design journey.",
-      fileUrl: "#", // Replace with actual PDF URL
-      imageUrl: "/material1.png", // Default image
-      previewUrl: "/preview1.jpg", // Hover image
-      type: "PDF",
-    },
-    {
-      title: "Circuit Simulation Cheat Sheet",
-      description:
-        "Quick reference guide for circuit simulation tools and techniques.",
-      fileUrl: "#",
-      imageUrl: "/material2.png",
-      previewUrl: "/preview2.jpg",
-      type: "PDF",
-    },
-    {
-      title: "Starter Project Templates",
-      description:
-        "Downloadable templates for your first electronics projects.",
-      fileUrl: "#",
-      imageUrl: "/material3.png",
-      previewUrl: "/preview3.jpg",
-      type: "ZIP",
-    },
-  ];
+  const [materials, setMaterials] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadMaterials();
+    
+    // Set up real-time subscription
+    const subscription = supabase
+      .channel('materials-changes')
+      .on('postgres_changes', 
+        { 
+          event: '*', 
+          schema: 'public', 
+          table: 'materials' 
+        }, 
+        (payload) => {
+          console.log('Material change received!', payload);
+          loadMaterials(); // Reload materials when changes occur
+        })
+      .subscribe();
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const loadMaterials = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('materials')
+        .select('*')
+        .eq('is_active', true)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setMaterials(data || []);
+    } catch (error) {
+      console.error('Error loading materials:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="w-full min-h-screen flex flex-col">
@@ -85,8 +99,13 @@ const MaterialsPage = () => {
             </p>
           </motion.div>
 
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {materials.map((material, index) => (
+          {loading ? (
+            <div className="w-full flex justify-center items-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--color-primary)]"></div>
+            </div>
+          ) : (
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {materials.map((material, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -99,14 +118,14 @@ const MaterialsPage = () => {
                 <div className="relative w-[150px] h-[150px]">
                   {/* Default Image */}
                   <Image
-                    src={material.imageUrl}
+                    src={material.image_url || "/material1.png"}
                     alt={`${material.title} Cover`}
                     fill
                     className="rounded-md object-cover transition-opacity duration-300 group-hover:opacity-0"
                   />
                   {/* Hover Preview Image */}
                   <Image
-                    src={material.previewUrl}
+                    src={material.preview_url || material.image_url || "/preview1.jpg"}
                     alt={`${material.title} Preview`}
                     fill
                     className="rounded-md object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -123,14 +142,15 @@ const MaterialsPage = () => {
 
                 {/* Download Button */}
                 <a
-                  href={material.fileUrl}
+                  href={`/resources/materials/${material.id}`}
                   className="w-full inline-flex justify-center items-center px-4 py-2 bg-[var(--color-primary)] text-white text-sm sm:text-base font-medium rounded-[10px] hover:bg-[var(--color-primary-dark)] transition-colors"
                 >
-                  Download {material.type}
+                  View {material.type}
                 </a>
               </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </main>
       <Footer />
